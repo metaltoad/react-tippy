@@ -665,7 +665,8 @@ function followCursorHandler(e) {
         }
     }
 
-    popper.style[(0, _prefix2.default)('transform')] = 'translate3d(' + x + 'px, ' + y + 'px, 0)';
+    popper.style.left = y + 'px';
+    popper.style.top = x + 'px';
 }
 
 /***/ }),

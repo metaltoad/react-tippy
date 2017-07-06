@@ -55,5 +55,7 @@ export default function followCursorHandler(e) {
         }
     }
 
-    popper.style[prefix('transform')] = `translate3d(${x}px, ${y}px, 0)`
+    popper.style.left = `${y}px`
+    popper.style.top = `${x}px`
+
 }
