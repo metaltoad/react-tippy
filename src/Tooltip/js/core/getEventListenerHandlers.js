@@ -64,9 +64,9 @@ export default function getEventListenerHandlers(el, popper, settings) {
 
     const handleTrigger = event => {
 
-      const mouseenterTouch = event.type === 'mouseenter' && Browser.SUPPORTS_TOUCH && Browser.touch
+      const mouseoverTouch = event.type === 'mouseover' && Browser.SUPPORTS_TOUCH && Browser.touch
 
-        if (mouseenterTouch && touchHold) return
+        if (mouseoverTouch && touchHold) return
 
         // Toggle show/hide when clicking click-triggered tooltips
         const isClick = event.type === 'click'
@@ -74,15 +74,15 @@ export default function getEventListenerHandlers(el, popper, settings) {
 
         isClick && isVisible(popper) && isNotPersistent ? hide() : show(event)
 
-        if (mouseenterTouch && Browser.iOS() && el.click) {
+        if (mouseoverTouch && Browser.iOS() && el.click) {
             el.click()
         }
     }
 
-    const handleMouseleave = event => {
+    const handleMouseout = event => {
 
-        // Don't fire 'mouseleave', use the 'touchend'
-        if (event.type === 'mouseleave' && Browser.SUPPORTS_TOUCH &&
+        // Don't fire 'mouseout', use the 'touchend'
+        if (event.type === 'mouseout' && Browser.SUPPORTS_TOUCH &&
         Browser.touch && touchHold) {
             return
         }
@@ -93,7 +93,7 @@ export default function getEventListenerHandlers(el, popper, settings) {
             const handleMousemove = event => {
 
                 const triggerHide = () => {
-                    document.body.removeEventListener('mouseleave', hide)
+                    document.body.removeEventListener('mouseout', hide)
                     document.removeEventListener('mousemove', handleMousemove)
                     hide()
                 }
@@ -116,7 +116,7 @@ export default function getEventListenerHandlers(el, popper, settings) {
                 }
             }
 
-            document.body.addEventListener('mouseleave', hide)
+            document.body.addEventListener('mouseout', hide)
             document.addEventListener('mousemove', handleMousemove)
 
             return
@@ -137,7 +137,7 @@ export default function getEventListenerHandlers(el, popper, settings) {
 
     return {
         handleTrigger,
-        handleMouseleave,
+        handleMouseout,
         handleBlur
     }
 }

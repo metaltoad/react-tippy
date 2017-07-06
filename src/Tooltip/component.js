@@ -9,7 +9,7 @@ const defaultProps = {
   arrow: false,
   delay: 0,
   hideDelay: 0,
-  trigger: 'mouseenter focus',
+  trigger: 'mouseover focus',
   duration: 375,
   hideDuration: 375,
   interactive: false,

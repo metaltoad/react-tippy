@@ -21,7 +21,7 @@ export default function createTrigger(event, el, handlers, touchHold) {
     })
 
     // Leave
-    if (event === 'mouseenter') {
+    if (event === 'mouseover') {
 
         if (Browser.SUPPORTS_TOUCH && touchHold) {
             el.addEventListener('touchstart', handlers.handleTrigger)
@@ -29,17 +29,17 @@ export default function createTrigger(event, el, handlers, touchHold) {
                 event: 'touchstart',
                 handler: handlers.handleTrigger
             })
-            el.addEventListener('touchend', handlers.handleMouseleave)
+            el.addEventListener('touchend', handlers.handleMouseout)
             listeners.push({
                 event: 'touchend',
-                handler: handlers.handleMouseleave
+                handler: handlers.handleMouseout
             })
         }
 
-        el.addEventListener('mouseleave', handlers.handleMouseleave)
+        el.addEventListener('mouseout', handlers.handleMouseout)
         listeners.push({
-            event: 'mouseleave',
-            handler: handlers.handleMouseleave
+            event: 'mouseout',
+            handler: handlers.handleMouseout
         })
     }
 

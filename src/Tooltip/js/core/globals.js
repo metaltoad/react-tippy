@@ -41,7 +41,7 @@ export const Defaults = {
     arrow: false,
     arrowSize: 'regular',
     delay: 0,
-    trigger: 'mouseenter focus',
+    trigger: 'mouseover focus',
     duration: 350,
     interactive: false,
     interactiveBorder: 2,

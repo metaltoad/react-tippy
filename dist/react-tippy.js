@@ -16,9 +16,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -119,12 +119,11 @@ var Selectors = exports.Selectors = {
     ARROW: '[x-arrow]',
     TOOLTIPPED_EL: '[data-tooltipped]',
     CONTROLLER: '[data-tippy-controller]'
-};
 
-/**
-* The default settings applied to each instance
-*/
-var Defaults = exports.Defaults = {
+    /**
+    * The default settings applied to each instance
+    */
+};var Defaults = exports.Defaults = {
     html: false,
     position: 'top',
     animation: 'shift',
@@ -132,7 +131,7 @@ var Defaults = exports.Defaults = {
     arrow: false,
     arrowSize: 'regular',
     delay: 0,
-    trigger: 'mouseenter focus',
+    trigger: 'mouseover focus',
     duration: 350,
     interactive: false,
     interactiveBorder: 2,
@@ -156,13 +155,12 @@ var Defaults = exports.Defaults = {
     popperOptions: {},
     open: undefined,
     onRequestClose: function onRequestClose() {}
-};
 
-/**
-* The keys of the defaults object for reducing down into a new object
-* Used in `getIndividualSettings()`
-*/
-var DefaultsKeys = exports.DefaultsKeys = Browser.SUPPORTED && Object.keys(Defaults);
+    /**
+    * The keys of the defaults object for reducing down into a new object
+    * Used in `getIndividualSettings()`
+    */
+};var DefaultsKeys = exports.DefaultsKeys = Browser.SUPPORTED && Object.keys(Defaults);
 
 /***/ }),
 /* 1 */
@@ -300,7 +298,7 @@ var defaultProps = {
   arrow: false,
   delay: 0,
   hideDelay: 0,
-  trigger: 'mouseenter focus',
+  trigger: 'mouseover focus',
   duration: 375,
   hideDuration: 375,
   interactive: false,
@@ -1052,7 +1050,7 @@ function createPopperInstance(refData) {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+        value: true
 });
 exports.default = createTooltips;
 
@@ -1088,49 +1086,49 @@ var idCounter = 1;
 * @return {Object[]} Array of ref data objects
 */
 function createTooltips(els) {
-    var _this = this;
+        var _this = this;
 
-    return els.reduce(function (a, el) {
+        return els.reduce(function (a, el) {
 
-        var settings = _this.settings.performance ? _this.settings : (0, _getIndividualSettings2.default)(el, _this.settings);
+                var settings = _this.settings.performance ? _this.settings : (0, _getIndividualSettings2.default)(el, _this.settings);
 
-        // animateFill is disabled if an arrow is true
-        if (settings.arrow) settings.animateFill = false;
+                // animateFill is disabled if an arrow is true
+                if (settings.arrow) settings.animateFill = false;
 
-        var html = settings.html,
-            trigger = settings.trigger,
-            touchHold = settings.touchHold;
+                var html = settings.html,
+                    trigger = settings.trigger,
+                    touchHold = settings.touchHold;
 
 
-        var title = el.getAttribute('title');
-        if (!title && !html) return a;
+                var title = el.getAttribute('title');
+                if (!title && !html) return a;
 
-        var id = idCounter;
-        el.setAttribute('data-tooltipped', '');
-        el.setAttribute('aria-describedby', 'tippy-tooltip-' + id);
-        (0, _removeTitle2.default)(el);
+                var id = idCounter;
+                el.setAttribute('data-tooltipped', '');
+                el.setAttribute('aria-describedby', 'tippy-tooltip-' + id);
+                (0, _removeTitle2.default)(el);
 
-        var popper = (0, _createPopperElement2.default)(id, title, settings);
-        var handlers = _getEventListenerHandlers2.default.call(_this, el, popper, settings);
-        var listeners = [];
+                var popper = (0, _createPopperElement2.default)(id, title, settings);
+                var handlers = _getEventListenerHandlers2.default.call(_this, el, popper, settings);
+                var listeners = [];
 
-        trigger.trim().split(' ').forEach(function (event) {
-            return listeners = listeners.concat((0, _createTrigger2.default)(event, el, handlers, touchHold));
-        });
+                trigger.trim().split(' ').forEach(function (event) {
+                        return listeners = listeners.concat((0, _createTrigger2.default)(event, el, handlers, touchHold));
+                });
 
-        a.push({
-            id: id,
-            el: el,
-            popper: popper,
-            settings: settings,
-            listeners: listeners,
-            tippyInstance: _this
-        });
+                a.push({
+                        id: id,
+                        el: el,
+                        popper: popper,
+                        settings: settings,
+                        listeners: listeners,
+                        tippyInstance: _this
+                });
 
-        idCounter++;
+                idCounter++;
 
-        return a;
-    }, []);
+                return a;
+        }, []);
 }
 
 /***/ }),
@@ -1168,7 +1166,7 @@ function createTrigger(event, el, handlers, touchHold) {
     });
 
     // Leave
-    if (event === 'mouseenter') {
+    if (event === 'mouseover') {
 
         if (_globals.Browser.SUPPORTS_TOUCH && touchHold) {
             el.addEventListener('touchstart', handlers.handleTrigger);
@@ -1176,17 +1174,17 @@ function createTrigger(event, el, handlers, touchHold) {
                 event: 'touchstart',
                 handler: handlers.handleTrigger
             });
-            el.addEventListener('touchend', handlers.handleMouseleave);
+            el.addEventListener('touchend', handlers.handleMouseout);
             listeners.push({
                 event: 'touchend',
-                handler: handlers.handleMouseleave
+                handler: handlers.handleMouseout
             });
         }
 
-        el.addEventListener('mouseleave', handlers.handleMouseleave);
+        el.addEventListener('mouseout', handlers.handleMouseout);
         listeners.push({
-            event: 'mouseleave',
-            handler: handlers.handleMouseleave
+            event: 'mouseout',
+            handler: handlers.handleMouseout
         });
     }
 
@@ -1319,9 +1317,9 @@ function getEventListenerHandlers(el, popper, settings) {
 
     var handleTrigger = function handleTrigger(event) {
 
-        var mouseenterTouch = event.type === 'mouseenter' && _globals.Browser.SUPPORTS_TOUCH && _globals.Browser.touch;
+        var mouseoverTouch = event.type === 'mouseover' && _globals.Browser.SUPPORTS_TOUCH && _globals.Browser.touch;
 
-        if (mouseenterTouch && touchHold) return;
+        if (mouseoverTouch && touchHold) return;
 
         // Toggle show/hide when clicking click-triggered tooltips
         var isClick = event.type === 'click';
@@ -1329,15 +1327,15 @@ function getEventListenerHandlers(el, popper, settings) {
 
         isClick && (0, _isVisible2.default)(popper) && isNotPersistent ? hide() : show(event);
 
-        if (mouseenterTouch && _globals.Browser.iOS() && el.click) {
+        if (mouseoverTouch && _globals.Browser.iOS() && el.click) {
             el.click();
         }
     };
 
-    var handleMouseleave = function handleMouseleave(event) {
+    var handleMouseout = function handleMouseout(event) {
 
-        // Don't fire 'mouseleave', use the 'touchend'
-        if (event.type === 'mouseleave' && _globals.Browser.SUPPORTS_TOUCH && _globals.Browser.touch && touchHold) {
+        // Don't fire 'mouseout', use the 'touchend'
+        if (event.type === 'mouseout' && _globals.Browser.SUPPORTS_TOUCH && _globals.Browser.touch && touchHold) {
             return;
         }
 
@@ -1347,7 +1345,7 @@ function getEventListenerHandlers(el, popper, settings) {
             var handleMousemove = function handleMousemove(event) {
 
                 var triggerHide = function triggerHide() {
-                    document.body.removeEventListener('mouseleave', hide);
+                    document.body.removeEventListener('mouseout', hide);
                     document.removeEventListener('mousemove', handleMousemove);
                     hide();
                 };
@@ -1370,7 +1368,7 @@ function getEventListenerHandlers(el, popper, settings) {
                 }
             };
 
-            document.body.addEventListener('mouseleave', hide);
+            document.body.addEventListener('mouseout', hide);
             document.addEventListener('mousemove', handleMousemove);
 
             return;
@@ -1391,7 +1389,7 @@ function getEventListenerHandlers(el, popper, settings) {
 
     return {
         handleTrigger: handleTrigger,
-        handleMouseleave: handleMouseleave,
+        handleMouseout: handleMouseout,
         handleBlur: handleBlur
     };
 }

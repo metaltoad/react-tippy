@@ -84,7 +84,7 @@ class App extends Component {
         <Tooltip
           // options
           title="Sticky"
-          trigger="mouseenter"
+          trigger="mouseover"
           sticky
           interactiveBorder={10}
         >
