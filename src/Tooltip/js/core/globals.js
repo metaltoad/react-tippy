@@ -46,6 +46,7 @@ export const Defaults = {
     interactive: false,
     interactiveBorder: 2,
     theme: 'dark',
+    classNames: '',
     size: 'regular',
     distance: 10,
     offset: 0,

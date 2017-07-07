@@ -200,6 +200,7 @@ class Tooltip extends Component {
         interactive: this.props.interactive,
         interactiveBorder: this.props.interactiveBorder,
         theme: this.props.theme,
+        classNames: this.props.classNames,
         offset: this.props.offset,
         hideOnClick: this.props.hideOnClick,
         multiple: this.props.multiple,
@@ -247,7 +248,6 @@ class Tooltip extends Component {
       <div
         ref={(tooltip) => { this.tooltipDOM = tooltip; }}
         title={this.props.title}
-        className={this.props.classNames}
         style={{
           display: 'inline',
           ...this.props.style

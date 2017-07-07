@@ -20,13 +20,14 @@ export default function createPopperElement(id, title, settings) {
         arrowSize,
         size,
         theme,
+        classNames,
         html,
         zIndex,
         interactive
     } = settings
 
     const popper = document.createElement('div')
-    popper.setAttribute('class', 'tippy-popper')
+    popper.setAttribute('class', `tippy-popper ${classNames}`)
     popper.setAttribute('role', 'tooltip')
     popper.setAttribute('aria-hidden', 'true')
     popper.setAttribute('id', `tippy-tooltip-${id}`)
