@@ -317,7 +317,7 @@ var defaultProps = {
   disabled: false,
   arrowSize: 'regular',
   size: 'regular',
-  className: '',
+  classNames: '',
   style: {},
   distance: 10,
   onRequestClose: function onRequestClose() {},
@@ -561,7 +561,7 @@ var Tooltip = function (_Component) {
             _this3.tooltipDOM = tooltip;
           },
           title: this.props.title,
-          className: this.props.className,
+          className: this.props.classNames,
           style: _extends({
             display: 'inline'
           }, this.props.style)

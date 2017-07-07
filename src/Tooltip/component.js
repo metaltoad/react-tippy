@@ -28,7 +28,7 @@ const defaultProps = {
   disabled: false,
   arrowSize: 'regular',
   size: 'regular',
-  className: '',
+  classNames: '',
   style: {},
   distance: 10,
   onRequestClose: () => {},
@@ -247,7 +247,7 @@ class Tooltip extends Component {
       <div
         ref={(tooltip) => { this.tooltipDOM = tooltip; }}
         title={this.props.title}
-        className={this.props.className}
+        className={this.props.classNames}
         style={{
           display: 'inline',
           ...this.props.style

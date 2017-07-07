@@ -116,7 +116,7 @@ const HeaderWithTootip = withTooltip(Header, {
 |beforeHidden|noop|function|Callback before hide|
 |hidden|noop|function|Callback after hide|
 |theme|`dark`|`dark` `light` `transparent`|The CSS styling theme.|
-|className|''|string|className of container|
+|classNames|''|string|classNames for container|
 |style|{}|React inline style (object)|style of container|
 
 
@@ -174,7 +174,7 @@ You can use `interactive` prop and `html` for your interactive tooltip
   open={open}
   onRequestClose={() => {console.log('call'); setIsOpen(false)}}
 >
-  <span className="App-intro" onClick={() => { setIsOpen(true) }}>
+  <span classNames="App-intro" onClick={() => { setIsOpen(true) }}>
     This will show {tooltipContent}
   </span>
 </Tooltip>
