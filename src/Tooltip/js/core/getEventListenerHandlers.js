@@ -17,6 +17,7 @@ export default function getEventListenerHandlers(el, popper, settings) {
         position,
         delay,
         duration,
+        hideDelay,
         interactive,
         interactiveBorder,
         distance,
@@ -26,11 +27,11 @@ export default function getEventListenerHandlers(el, popper, settings) {
         touchWait
     } = settings
 
-    let showDelay, hideDelay
+    let delayShow, delayHide
 
     const clearTimeouts = () => {
-        clearTimeout(showDelay)
-        clearTimeout(hideDelay)
+        clearTimeout(delayShow)
+        clearTimeout(delayHide)
     }
 
     const _show = () => {
@@ -41,7 +42,7 @@ export default function getEventListenerHandlers(el, popper, settings) {
         const _delay = Array.isArray(delay) ? delay[0] : delay
 
         if (delay) {
-            showDelay = setTimeout(() => this.show(popper), _delay)
+            delayShow = setTimeout(() => this.show(popper), _delay)
         } else {
             this.show(popper)
         }
@@ -53,10 +54,10 @@ export default function getEventListenerHandlers(el, popper, settings) {
     const hide = () => {
         clearTimeouts()
 
-        const _delay = Array.isArray(delay) ? delay[1] : delay
+        const _delay = Array.isArray(hideDelay) ? hideDelay[1] : hideDelay
 
-        if (delay) {
-            hideDelay = setTimeout(() => this.hide(popper), _delay)
+        if (hideDelay) {
+            delayHide = setTimeout(() => this.hide(popper), _delay)
         } else {
             this.hide(popper)
         }

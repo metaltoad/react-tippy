@@ -136,6 +136,7 @@ var Selectors = exports.Selectors = {
     interactive: false,
     interactiveBorder: 2,
     theme: 'dark',
+    classNames: '',
     size: 'regular',
     distance: 10,
     offset: 0,
@@ -507,6 +508,7 @@ var Tooltip = function (_Component) {
           interactive: this.props.interactive,
           interactiveBorder: this.props.interactiveBorder,
           theme: this.props.theme,
+          classNames: this.props.classNames,
           offset: this.props.offset,
           hideOnClick: this.props.hideOnClick,
           multiple: this.props.multiple,
@@ -561,7 +563,6 @@ var Tooltip = function (_Component) {
             _this3.tooltipDOM = tooltip;
           },
           title: this.props.title,
-          className: this.props.classNames,
           style: _extends({
             display: 'inline'
           }, this.props.style)
@@ -894,13 +895,14 @@ function createPopperElement(id, title, settings) {
         arrowSize = settings.arrowSize,
         size = settings.size,
         theme = settings.theme,
+        classNames = settings.classNames,
         html = settings.html,
         zIndex = settings.zIndex,
         interactive = settings.interactive;
 
 
     var popper = document.createElement('div');
-    popper.setAttribute('class', 'tippy-popper');
+    popper.setAttribute('class', 'tippy-popper ' + classNames);
     popper.setAttribute('role', 'tooltip');
     popper.setAttribute('aria-hidden', 'true');
     popper.setAttribute('id', 'tippy-tooltip-' + id);
@@ -1265,6 +1267,7 @@ function getEventListenerHandlers(el, popper, settings) {
     var position = settings.position,
         delay = settings.delay,
         duration = settings.duration,
+        hideDelay = settings.hideDelay,
         interactive = settings.interactive,
         interactiveBorder = settings.interactiveBorder,
         distance = settings.distance,
@@ -1274,12 +1277,12 @@ function getEventListenerHandlers(el, popper, settings) {
         touchWait = settings.touchWait;
 
 
-    var showDelay = void 0,
-        hideDelay = void 0;
+    var delayShow = void 0,
+        delayHide = void 0;
 
     var clearTimeouts = function clearTimeouts() {
-        clearTimeout(showDelay);
-        clearTimeout(hideDelay);
+        clearTimeout(delayShow);
+        clearTimeout(delayHide);
     };
 
     var _show = function _show() {
@@ -1290,7 +1293,7 @@ function getEventListenerHandlers(el, popper, settings) {
         var _delay = Array.isArray(delay) ? delay[0] : delay;
 
         if (delay) {
-            showDelay = setTimeout(function () {
+            delayShow = setTimeout(function () {
                 return _this.show(popper);
             }, _delay);
         } else {
@@ -1305,10 +1308,10 @@ function getEventListenerHandlers(el, popper, settings) {
     var hide = function hide() {
         clearTimeouts();
 
-        var _delay = Array.isArray(delay) ? delay[1] : delay;
+        var _delay = Array.isArray(hideDelay) ? hideDelay[1] : hideDelay;
 
-        if (delay) {
-            hideDelay = setTimeout(function () {
+        if (hideDelay) {
+            delayHide = setTimeout(function () {
                 return _this.hide(popper);
             }, _delay);
         } else {

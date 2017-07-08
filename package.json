@@ -1,6 +1,6 @@
 {
   "name": "teletippy",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React tippy",
   "main": "dist/react-tippy.js",
   "author": "Khoa Thai",
